@@ -41,7 +41,7 @@
 		3E9F4BFA181F03F300F33B48 /* CardIOMacros.m in Sources */ = {isa = PBXBuildFile; fileRef = 0393B0B5143A625300A65A00 /* CardIOMacros.m */; };
 		3E9F4BFC181F03F300F33B48 /* CardIOTransitionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F66D67146456880001F15F /* CardIOTransitionView.m */; };
 		3E9F4BFE181F03F300F33B48 /* CardIOCardScanner.mm in Sources */ = {isa = PBXBuildFile; fileRef = 03C8E03C1570272F00569A22 /* CardIOCardScanner.mm */; };
-		3E9F4C00181F03F300F33B48 /* dmz_all.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0378AE18158C01CA00545AAA /* dmz_all.cpp */; settings = {COMPILER_FLAGS = "-O3"; }; };
+		3E9F4C00181F03F300F33B48 /* dmz_all.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0378AE18158C01CA00545AAA /* dmz_all.cpp */; settings = {COMPILER_FLAGS = "-O3 -fslp-vectorize-aggressive"; }; };
 		3E9F4C01181F03F300F33B48 /* CardIOAnalytics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8487783115A39BCB00B08B41 /* CardIOAnalytics.mm */; };
 		3E9F4C02181F03F300F33B48 /* mz_ios.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84979985159E5E0500527FF5 /* mz_ios.mm */; };
 		3E9F4C03181F03F300F33B48 /* CardIOGPUFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8497998C159E5E3C00527FF5 /* CardIOGPUFilter.m */; };
@@ -1764,7 +1764,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastUpgradeCheck = 0630;
 				TargetAttributes = {
 					3E9F4C4A181F07B700F33B48 = {
 						DevelopmentTeam = V8KL7848Q4;
@@ -2147,7 +2147,12 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
-				"OTHER_CFLAGS[sdk=iphoneos*][arch=*]" = (
+				"OTHER_CFLAGS[arch=arm64]" = "";
+				"OTHER_CFLAGS[arch=armv7]" = (
+					"-mfloat-abi=softfp",
+					"-mfpu=neon",
+				);
+				"OTHER_CFLAGS[sdk=iphoneos*][arch=armv7s]" = (
 					"-mfloat-abi=softfp",
 					"-mfpu=neon",
 				);
@@ -2192,7 +2197,12 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
-				"OTHER_CFLAGS[sdk=iphoneos*][arch=*]" = (
+				"OTHER_CFLAGS[arch=arm64]" = "";
+				"OTHER_CFLAGS[arch=armv7s]" = (
+					"-mfloat-abi=softfp",
+					"-mfpu=neon",
+				);
+				"OTHER_CFLAGS[sdk=iphoneos*][arch=armv7]" = (
 					"-mfloat-abi=softfp",
 					"-mfpu=neon",
 				);
@@ -2235,10 +2245,15 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
-				"OTHER_CFLAGS[sdk=iphoneos*][arch=*]" = (
+				"OTHER_CFLAGS[arch=armv7]" = (
 					"-mfloat-abi=softfp",
 					"-mfpu=neon",
 				);
+				"OTHER_CFLAGS[arch=armv7s]" = (
+					"-mfloat-abi=softfp",
+					"-mfpu=neon",
+				);
+				"OTHER_CFLAGS[sdk=iphoneos*][arch=arm64]" = "";
 				OTHER_LDFLAGS = "";
 				PRELINK_LIBS = "$(SRCROOT)/opencv_device/lib/libopencv_core.a $(SRCROOT)/opencv_device/lib/libopencv_imgproc.a";
 				PRODUCT_NAME = CardIO;
